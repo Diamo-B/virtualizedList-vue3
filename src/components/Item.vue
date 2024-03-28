@@ -1,24 +1,15 @@
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
-
-export default defineComponent({
-    props: {
-        filteredItems: {
-            type: Array as PropType<string[]>,
-            required: true,
-        },
-        scrollTop: {
-            type: Number as PropType<number>,
-            required: true,
-        }
-    },
-});
+<script setup lang="ts">
+    interface Props  {
+        filteredItems: string[],
+        scrollTop: number
+    }
+ defineProps<Props>();
 </script>
 
 <template>
     <p
         v-for="(item, index) in filteredItems" :key="index"
-        :class="`my-5 border-2 rounded-lg py-3 text-center h-16 w-full absolute top-${Math.floor(scrollTop/64)+index}`"
+        class="w-full h-16 px-10 absolute" :style="{top: `${(Math.floor(scrollTop/64)+index)*64}px`}"
     >
         {{ item }}
     </p>
